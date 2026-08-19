@@ -53,7 +53,7 @@ export default function GeographicPage() {
           location: d.name,
           value: d.value,
           growth: d.growth ?? Math.round((Math.random() - 0.5) * 40),
-          avg_salary: d.count > 0 ? Math.round(d.value / d.count * 1000) : Math.round(Math.random() * 150000 + 50000),
+          avg_salary: metric === 'salary' ? d.value : (d.count > 0 ? Math.round((d.value / d.count) * 1000) : 1450000),
           x: ((d.lon + 180) / 360) * 100,
           y: ((90 - d.lat) / 180) * 100,
           size: Math.max(3, Math.min(25, (Math.abs(d.value) / maxV) * 22 + 3)),

@@ -92,7 +92,11 @@ export default function SkillGraphPage() {
     if (!graphData) return [];
     let list = graphData.nodes;
     if (selectedCluster !== 'all') {
-      list = list.filter((n) => (n.cluster || n.category) === selectedCluster);
+      const target = selectedCluster.toLowerCase();
+      list = list.filter((n) => {
+        const c = (n.cluster || n.category || '').toLowerCase();
+        return c === target || c.includes(target) || target.includes(c);
+      });
     }
     if (search.trim()) {
       list = list.filter((n) => n.name.toLowerCase().includes(search.toLowerCase()));

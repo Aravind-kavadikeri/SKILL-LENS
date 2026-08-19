@@ -380,17 +380,43 @@ export async function getSkillGraph(): Promise<SkillGraphResponse> {
   } catch {
     return {
       nodes: [
-        { id: 'python', name: 'Python', category: 'Language', weight: 95, cluster: 'Core Tech' },
-        { id: 'pytorch', name: 'PyTorch', category: 'Framework', weight: 88, cluster: 'AI/ML' },
-        { id: 'fastapi', name: 'FastAPI', category: 'Backend', weight: 82, cluster: 'Web Services' },
-        { id: 'docker', name: 'Docker', category: 'DevOps', weight: 85, cluster: 'Infrastructure' },
-        { id: 'react', name: 'React', category: 'Frontend', weight: 90, cluster: 'Web UI' },
+        { id: 'python', name: 'Python', category: 'Language', weight: 9.5, cluster: 'core' },
+        { id: 'typescript', name: 'TypeScript', category: 'Language', weight: 8.8, cluster: 'core' },
+        { id: 'cpp', name: 'C++', category: 'Language', weight: 7.9, cluster: 'core' },
+        { id: 'pytorch', name: 'PyTorch', category: 'Framework', weight: 9.2, cluster: 'ai-ml' },
+        { id: 'tensorflow', name: 'TensorFlow', category: 'Framework', weight: 8.4, cluster: 'ai-ml' },
+        { id: 'llms', name: 'Generative AI & LLMs', category: 'AI', weight: 9.6, cluster: 'ai-ml' },
+        { id: 'transformers', name: 'HuggingFace', category: 'AI', weight: 8.7, cluster: 'ai-ml' },
+        { id: 'fastapi', name: 'FastAPI', category: 'Backend', weight: 8.5, cluster: 'web' },
+        { id: 'react', name: 'React', category: 'Frontend', weight: 9.0, cluster: 'web' },
+        { id: 'nextjs', name: 'Next.js', category: 'Frontend', weight: 8.6, cluster: 'web' },
+        { id: 'nodejs', name: 'Node.js', category: 'Backend', weight: 8.3, cluster: 'web' },
+        { id: 'sql', name: 'SQL & PostgreSQL', category: 'Database', weight: 9.1, cluster: 'data' },
+        { id: 'spark', name: 'Apache Spark', category: 'Big Data', weight: 8.2, cluster: 'data' },
+        { id: 'vector-db', name: 'Vector DBs', category: 'Database', weight: 8.8, cluster: 'data' },
+        { id: 'docker', name: 'Docker', category: 'DevOps', weight: 8.9, cluster: 'infra' },
+        { id: 'kubernetes', name: 'Kubernetes', category: 'DevOps', weight: 8.4, cluster: 'infra' },
+        { id: 'aws', name: 'AWS Cloud', category: 'Cloud', weight: 8.7, cluster: 'infra' },
+        { id: 'system-design', name: 'System Architecture', category: 'Architecture', weight: 9.0, cluster: 'soft' },
+        { id: 'agile', name: 'Technical Leadership', category: 'Management', weight: 8.0, cluster: 'soft' },
       ],
       edges: [
-        { source: 'python', target: 'pytorch', weight: 0.95, relationship: 'Used For' },
-        { source: 'python', target: 'fastapi', weight: 0.90, relationship: 'Powers' },
-        { source: 'fastapi', target: 'docker', weight: 0.85, relationship: 'Containerized With' },
-        { source: 'react', target: 'fastapi', weight: 0.88, relationship: 'Connects To' },
+        { source: 'python', target: 'pytorch', weight: 0.95, relationship: 'Core Engine' },
+        { source: 'python', target: 'fastapi', weight: 0.90, relationship: 'Framework' },
+        { source: 'python', target: 'spark', weight: 0.85, relationship: 'PySpark Data' },
+        { source: 'python', target: 'sql', weight: 0.88, relationship: 'DB Connector' },
+        { source: 'pytorch', target: 'llms', weight: 0.92, relationship: 'Model Weights' },
+        { source: 'pytorch', target: 'transformers', weight: 0.90, relationship: 'Architecture' },
+        { source: 'llms', target: 'vector-db', weight: 0.89, relationship: 'RAG Retrieval' },
+        { source: 'typescript', target: 'react', weight: 0.95, relationship: 'Typed UI' },
+        { source: 'react', target: 'nextjs', weight: 0.92, relationship: 'SSR Framework' },
+        { source: 'react', target: 'fastapi', weight: 0.86, relationship: 'API Integration' },
+        { source: 'fastapi', target: 'docker', weight: 0.88, relationship: 'Containerized' },
+        { source: 'docker', target: 'kubernetes', weight: 0.90, relationship: 'Orchestrated' },
+        { source: 'kubernetes', target: 'aws', weight: 0.87, relationship: 'EKS Cloud' },
+        { source: 'sql', target: 'fastapi', weight: 0.85, relationship: 'ORM Query' },
+        { source: 'system-design', target: 'kubernetes', weight: 0.84, relationship: 'Scalability' },
+        { source: 'system-design', target: 'aws', weight: 0.86, relationship: 'Cloud Infra' },
       ],
     };
   }
@@ -407,11 +433,20 @@ export async function getCareerPaths(role: string, targetRole?: string): Promise
       paths: [
         {
           nodes: [
-            { skill: 'Software Engineer', level: 'Current' },
-            { skill: 'Backend AI Developer', level: 'Intermediate' },
-            { skill: 'Senior Machine Learning Architect', level: 'Target' },
+            { skill: role || 'Software Engineer', level: 'proficient' },
+            { skill: 'FastAPI Microservices', level: 'intermediate' },
+            { skill: 'PyTorch & Neural Nets', level: 'intermediate' },
+            { skill: targetRole || 'AI / ML Engineer', level: 'beginner' },
           ],
-          total_effort: 6,
+          total_effort: 8.5,
+        },
+        {
+          nodes: [
+            { skill: role || 'Software Engineer', level: 'proficient' },
+            { skill: 'Distributed Systems & Vector DBs', level: 'intermediate' },
+            { skill: targetRole || 'AI / ML Engineer', level: 'beginner' },
+          ],
+          total_effort: 6.2,
         },
       ],
     };
@@ -423,14 +458,34 @@ export async function getGeographic(metric: string = 'salary'): Promise<Geograph
     const { data } = await api.get<GeographicResponse>('/geographic', { params: { metric } });
     return data;
   } catch {
+    const rawLocations = [
+      { name: 'Bengaluru, KA', lat: 12.9716, lon: 77.5946, salary: 1850000, hiring: 48500, remote: 68, growth: 24.2 },
+      { name: 'Hyderabad, TS', lat: 17.3850, lon: 78.4867, salary: 1650000, hiring: 32100, remote: 62, growth: 21.5 },
+      { name: 'Pune / Mumbai, MH', lat: 18.5204, lon: 73.8567, salary: 1550000, hiring: 24400, remote: 58, growth: 18.1 },
+      { name: 'Gurgaon / Delhi NCR', lat: 28.4595, lon: 77.0266, salary: 1750000, hiring: 21200, remote: 65, growth: 19.8 },
+      { name: 'Chennai, TN', lat: 13.0827, lon: 80.2707, salary: 1400000, hiring: 16800, remote: 52, growth: 15.4 },
+      { name: 'San Francisco, CA (USA)', lat: 37.7749, lon: -122.4194, salary: 13500000, hiring: 18400, remote: 82, growth: 28.6 },
+      { name: 'London (UK)', lat: 51.5074, lon: -0.1278, salary: 7800000, hiring: 14200, remote: 71, growth: 17.2 },
+      { name: 'Singapore', lat: 1.3521, lon: 103.8198, salary: 8400000, hiring: 11600, remote: 64, growth: 22.0 },
+    ];
+
+    const locations = rawLocations.map((loc) => ({
+      name: loc.name,
+      lat: loc.lat,
+      lon: loc.lon,
+      value: metric === 'hiring' ? loc.hiring : metric === 'remote' ? loc.remote : loc.salary,
+      count: loc.hiring,
+      growth: loc.growth,
+    }));
+
+    const totalVal = locations.reduce((acc, l) => acc + l.value, 0);
     return {
-      locations: [
-        { name: 'Bengaluru, KA', lat: 12.9716, lon: 77.5946, value: 1850000, count: 48500, growth: 24.2 },
-        { name: 'Hyderabad, TS', lat: 17.3850, lon: 78.4867, value: 1650000, count: 32100, growth: 21.5 },
-        { name: 'Pune, MH', lat: 18.5204, lon: 73.8567, value: 1450000, count: 24400, growth: 18.1 },
-        { name: 'Gurgaon / NCR', lat: 28.4595, lon: 77.0266, value: 1750000, count: 21200, growth: 19.8 },
-      ],
-      summary: { total: 126200, avg_value: 1675000, top_region: 'Bengaluru, KA' },
+      locations,
+      summary: {
+        total: locations.reduce((acc, l) => acc + l.count, 0),
+        avg_value: Math.round(totalVal / locations.length),
+        top_region: 'Bengaluru, KA',
+      },
     };
   }
 }
