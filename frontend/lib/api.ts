@@ -222,10 +222,10 @@ export async function explainSalary(req: SalaryRequest): Promise<SalaryExplainRe
       base_value: base,
       features: [
         { name: 'experience', value: req.experience || 3, shap_value: expShap, impact_direction: 'positive' },
-        { name: 'education', value: req.education || 'B.Tech', shap_value: 150000, impact_direction: 'positive' },
-        { name: 'location', value: req.location || 'Bengaluru', shap_value: 220000, impact_direction: 'positive' },
-        { name: 'industry', value: req.industry || 'Technology', shap_value: 140000, impact_direction: 'positive' },
-        { name: 'skills', value: `${(req.skills || []).length || 4} skills`, shap_value: 110000, impact_direction: 'positive' },
+        { name: 'education', value: 1, shap_value: 150000, impact_direction: 'positive' },
+        { name: 'location', value: 1, shap_value: 220000, impact_direction: 'positive' },
+        { name: 'industry', value: 1, shap_value: 140000, impact_direction: 'positive' },
+        { name: 'skills', value: (req.skills || []).length || 4, shap_value: 110000, impact_direction: 'positive' },
       ],
       waterfall: [
         { feature: 'Base Role Salary', contribution: base, cumulative: base },
