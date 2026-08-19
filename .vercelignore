@@ -1,7 +1,16 @@
 # Ignore Python API & backend files from Vercel auto-detection
-api/
-src/
-Dockerfile.api
-Dockerfile.frontend
+api
+api/*
+api/**
+src
+src/*
+src/**
+Dockerfile*
 docker-compose.yml
 *.py
+**/*.py
+requirements.txt
+**/requirements.txt
+uv.lock
+.venv
+
