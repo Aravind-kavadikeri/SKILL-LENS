@@ -25,7 +25,7 @@ import type {
   ChatResponse,
 } from './types';
 
-const rawApiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+const rawApiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://rich-beans-brake.loca.lt/api/v1';
 
 
 const baseURL = rawApiUrl.endsWith('/api/v1')
@@ -35,6 +35,10 @@ const baseURL = rawApiUrl.endsWith('/api/v1')
 const api = axios.create({
   baseURL,
   timeout: 30000,
+  headers: {
+    'bypass-tunnel-reminder': 'true',
+    'ngrok-skip-browser-warning': 'true',
+  },
 });
 
 api.interceptors.response.use(
