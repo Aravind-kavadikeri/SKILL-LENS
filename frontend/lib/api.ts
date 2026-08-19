@@ -51,27 +51,27 @@ api.interceptors.response.use(
   }
 );
 
-// Fallback Mock Data
+// Fallback Mock Data matching actual Python API backend (in INR / LPA)
 const MOCK_DASHBOARD: DashboardSummary = {
   total_jobs: 142500,
   total_skills: 850,
-  avg_salary: 128500,
+  avg_salary: 1450000,
   market_pulse_score: 87.4,
   job_growth_rate: 14.2,
   top_skills: [
     { name: 'Python', growth: 24.5, demand: 95, category: 'AI & Data' },
-    { name: 'TypeScript', growth: 18.2, demand: 88, category: 'Frontend' },
     { name: 'PyTorch / ML', growth: 32.1, demand: 92, category: 'AI & Data' },
+    { name: 'TypeScript / React', growth: 18.2, demand: 88, category: 'Frontend' },
+    { name: 'FastAPI / Node', growth: 21.4, demand: 86, category: 'Backend' },
     { name: 'AWS / Cloud', growth: 15.8, demand: 84, category: 'Cloud Infrastructure' },
-    { name: 'Docker & K8s', growth: 19.4, demand: 81, category: 'DevOps' },
   ],
   salary_trend: [
-    { month: 'Jan', salary: 118000 },
-    { month: 'Feb', salary: 120500 },
-    { month: 'Mar', salary: 122000 },
-    { month: 'Apr', salary: 124500 },
-    { month: 'May', salary: 126000 },
-    { month: 'Jun', salary: 128500 },
+    { month: 'Jan', salary: 1250000 },
+    { month: 'Feb', salary: 1300000 },
+    { month: 'Mar', salary: 1350000 },
+    { month: 'Apr', salary: 1380000 },
+    { month: 'May', salary: 1420000 },
+    { month: 'Jun', salary: 1450000 },
   ],
 };
 
@@ -91,17 +91,17 @@ export async function getMarketPulse(): Promise<MarketPulseResponse> {
   } catch {
     return {
       data: [
-        { date: '2024-01', value: 72, label: 'Stable Growth' },
-        { date: '2024-02', value: 76, label: 'Tech Surge' },
-        { date: '2024-03', value: 81, label: 'AI Expansion' },
-        { date: '2024-04', value: 84, label: 'High Demand' },
-        { date: '2024-05', value: 87, label: 'Peak Hiring' },
+        { date: '2024-01', value: 72, label: 'Stable Hiring' },
+        { date: '2024-02', value: 76, label: 'Tech Expansion' },
+        { date: '2024-03', value: 81, label: 'AI Surge' },
+        { date: '2024-04', value: 84, label: 'High Talent Demand' },
+        { date: '2024-05', value: 87, label: 'Peak Hiring Phase' },
       ],
     };
   }
 }
 
-export async function getJobMarket(country: string = 'United States'): Promise<JobMarketData> {
+export async function getJobMarket(country: string = 'India'): Promise<JobMarketData> {
   try {
     const { data } = await api.get<JobMarketData>('/job-market', { params: { country } });
     return data;
@@ -110,18 +110,18 @@ export async function getJobMarket(country: string = 'United States'): Promise<J
       country,
       total_jobs: 142500,
       locations: [
-        { name: 'California', count: 34500, percentage: 24.2 },
-        { name: 'New York', count: 22100, percentage: 15.5 },
-        { name: 'Texas', count: 18400, percentage: 12.9 },
-        { name: 'Washington', count: 14200, percentage: 9.9 },
+        { name: 'Bengaluru', count: 48500, percentage: 34.0 },
+        { name: 'Hyderabad', count: 32100, percentage: 22.5 },
+        { name: 'Pune / Mumbai', count: 24400, percentage: 17.1 },
+        { name: 'Delhi NCR (Gurgaon/Noida)', count: 21200, percentage: 14.8 },
       ],
       industries: [
-        { name: 'Artificial Intelligence', count: 48900, percentage: 34.3 },
-        { name: 'Software Development', count: 42100, percentage: 29.5 },
-        { name: 'Fintech & Banking', count: 21500, percentage: 15.0 },
-        { name: 'Healthcare Tech', count: 16200, percentage: 11.3 },
+        { name: 'Artificial Intelligence & Data', count: 52900, percentage: 37.1 },
+        { name: 'Software Development & SaaS', count: 41100, percentage: 28.8 },
+        { name: 'Fintech & Banking', count: 24500, percentage: 17.2 },
+        { name: 'Healthcare & E-Commerce', count: 14200, percentage: 10.0 },
       ],
-      remote_stats: { remote_percent: 42, hybrid_percent: 38, onsite_percent: 20 },
+      remote_stats: { remote_percent: 38, hybrid_percent: 45, onsite_percent: 17 },
     };
   }
 }
@@ -135,8 +135,8 @@ export async function getTrendingSkills(months: number = 6): Promise<{ skills: T
       skills: [
         { name: 'Generative AI & LLMs', growth_rate: 45.2, category: 'AI', trend: [{ date: '2024-01', value: 60 }, { date: '2024-06', value: 95 }] },
         { name: 'PyTorch / Deep Learning', growth_rate: 34.8, category: 'AI', trend: [{ date: '2024-01', value: 50 }, { date: '2024-06', value: 85 }] },
-        { name: 'Rust Development', growth_rate: 29.1, category: 'Engineering', trend: [{ date: '2024-01', value: 40 }, { date: '2024-06', value: 78 }] },
-        { name: 'Kubernetes & Cloud Ops', growth_rate: 22.4, category: 'DevOps', trend: [{ date: '2024-01', value: 55 }, { date: '2024-06', value: 80 }] },
+        { name: 'FastAPI & Microservices', growth_rate: 29.1, category: 'Backend', trend: [{ date: '2024-01', value: 45 }, { date: '2024-06', value: 78 }] },
+        { name: 'Kubernetes & Docker', growth_rate: 22.4, category: 'DevOps', trend: [{ date: '2024-01', value: 55 }, { date: '2024-06', value: 80 }] },
       ],
     };
   }
@@ -163,9 +163,27 @@ export async function getSalaryDistribution(role: string, country: string) {
     return data;
   } catch {
     return {
-      role,
-      country,
-      percentiles: { p10: 85000, p25: 105000, p50: 135000, p75: 165000, p90: 198000 },
+      role: role || 'Software Engineer',
+      country: country || 'India',
+      avg_salary: 1450000,
+      median_salary: 1250000,
+      percentile_25: 750000,
+      percentile_75: 1850000,
+      distribution: [
+        { range: '₹0-₹5 LPA', count: 2400 },
+        { range: '₹5-₹10 LPA', count: 5800 },
+        { range: '₹10-₹15 LPA', count: 8200 },
+        { range: '₹15-₹25 LPA', count: 6400 },
+        { range: '₹25-₹40 LPA', count: 3200 },
+        { range: '₹40-₹60 LPA', count: 1200 },
+        { range: '₹60 LPA+', count: 450 },
+      ],
+      by_experience: [
+        { level: 'Entry (0-2 yrs)', avg_salary: 750000, count: 4500 },
+        { level: 'Mid (3-5 yrs)', avg_salary: 1450000, count: 8500 },
+        { level: 'Senior (5-8 yrs)', avg_salary: 2650000, count: 6200 },
+        { level: 'Lead (8+ yrs)', avg_salary: 4500000, count: 2800 },
+      ],
     };
   }
 }
@@ -175,14 +193,19 @@ export async function predictSalary(req: SalaryRequest): Promise<SalaryResponse>
     const { data } = await api.post<SalaryResponse>('/salary/predict', req);
     return data;
   } catch {
-    const baseVal = 135000 + (req.experience || 3) * 8500;
+    const exp = req.experience || 3;
+    const baseVal = 950000 + Math.log2(exp + 1) * 320000;
+    const predicted = Math.round(baseVal / 10000) * 10000;
     return {
-      predicted_salary: baseVal,
-      confidence_interval: [baseVal * 0.9, baseVal * 1.12],
+      predicted_salary: predicted,
+      confidence_interval: [Math.round(predicted * 0.9), Math.round(predicted * 1.12)],
       factors: [
-        { name: 'Experience Level', impact: 28000, value: `${req.experience || 3} years` },
-        { name: 'Primary Skills', impact: 18500, value: (req.skills || ['Python', 'Machine Learning']).join(', ') },
-        { name: 'Location Tier', impact: 12000, value: req.location || 'United States' },
+        { name: 'Base Role Salary', impact: 950000, value: '₹9,50,000' },
+        { name: 'Experience Impact', impact: Math.round(exp * 120000), value: `${exp} years` },
+        { name: 'Education Premium', impact: 150000, value: req.education || 'B.Tech / Masters' },
+        { name: 'Location Multiplier', impact: 220000, value: req.location || 'Bengaluru / Hybrid' },
+        { name: 'Industry Premium', impact: 140000, value: req.industry || 'Technology / FinTech' },
+        { name: 'Skills Bonus', impact: 110000, value: `${(req.skills || []).length || 4} key skills` },
       ],
     };
   }
@@ -193,17 +216,22 @@ export async function explainSalary(req: SalaryRequest): Promise<SalaryExplainRe
     const { data } = await api.post<SalaryExplainResponse>('/salary/explain', req);
     return data;
   } catch {
+    const base = 950000;
+    const expShap = (req.experience || 3) * 120000;
     return {
-      base_value: 110000,
+      base_value: base,
       features: [
-        { name: 'Experience', value: req.experience || 3, shap_value: 22000, impact_direction: 'positive' },
-        { name: 'Python & AI Skills', value: 1, shap_value: 16500, impact_direction: 'positive' },
-        { name: 'High-Demand Location', value: 1, shap_value: 11000, impact_direction: 'positive' },
+        { name: 'experience', value: req.experience || 3, shap_value: expShap, impact_direction: 'positive' },
+        { name: 'education', value: req.education || 'B.Tech', shap_value: 150000, impact_direction: 'positive' },
+        { name: 'location', value: req.location || 'Bengaluru', shap_value: 220000, impact_direction: 'positive' },
+        { name: 'industry', value: req.industry || 'Technology', shap_value: 140000, impact_direction: 'positive' },
+        { name: 'skills', value: `${(req.skills || []).length || 4} skills`, shap_value: 110000, impact_direction: 'positive' },
       ],
       waterfall: [
-        { feature: 'Base Tech Salary', contribution: 110000, cumulative: 110000 },
-        { feature: 'Years of Experience', contribution: 22000, cumulative: 132000 },
-        { feature: 'AI & Data Expertise', contribution: 16500, cumulative: 148500 },
+        { feature: 'Base Role Salary', contribution: base, cumulative: base },
+        { feature: 'Years of Experience', contribution: expShap, cumulative: base + expShap },
+        { feature: 'Location & Tier', contribution: 220000, cumulative: base + expShap + 220000 },
+        { feature: 'Skills & Tech Stack', contribution: 110000, cumulative: base + expShap + 330000 },
       ],
     };
   }
@@ -219,7 +247,7 @@ export async function getForecast(
     return data;
   } catch {
     return {
-      skill,
+      skill: skill || 'PyTorch',
       model,
       historical: [
         { date: '2023-06', value: 50 },
@@ -324,7 +352,7 @@ export async function getRoadmap(role: string): Promise<RoadmapResponse> {
     return data;
   } catch {
     return {
-      role,
+      role: role || 'Machine Learning Engineer',
       stages: [
         {
           order: 1,
@@ -397,12 +425,12 @@ export async function getGeographic(metric: string = 'salary'): Promise<Geograph
   } catch {
     return {
       locations: [
-        { name: 'San Francisco, CA', lat: 37.7749, lon: -122.4194, value: 165000, count: 18400, growth: 18.2 },
-        { name: 'New York, NY', lat: 40.7128, lon: -74.006, value: 155000, count: 15200, growth: 14.5 },
-        { name: 'Austin, TX', lat: 30.2672, lon: -97.7431, value: 138000, count: 11200, growth: 22.1 },
-        { name: 'Seattle, WA', lat: 47.6062, lon: -122.3321, value: 160000, count: 13800, growth: 16.8 },
+        { name: 'Bengaluru, KA', lat: 12.9716, lon: 77.5946, value: 1850000, count: 48500, growth: 24.2 },
+        { name: 'Hyderabad, TS', lat: 17.3850, lon: 78.4867, value: 1650000, count: 32100, growth: 21.5 },
+        { name: 'Pune, MH', lat: 18.5204, lon: 73.8567, value: 1450000, count: 24400, growth: 18.1 },
+        { name: 'Gurgaon / NCR', lat: 28.4595, lon: 77.0266, value: 1750000, count: 21200, growth: 19.8 },
       ],
-      summary: { total: 58600, avg_value: 154500, top_region: 'San Francisco, CA' },
+      summary: { total: 126200, avg_value: 1675000, top_region: 'Bengaluru, KA' },
     };
   }
 }
@@ -460,19 +488,19 @@ export async function getExecutiveView(view: string): Promise<Record<string, Exe
       overview: {
         kpi_summary: {
           total_jobs_market: 142500,
-          avg_salary_yoy_growth: 8.4,
+          avg_salary_yoy_growth: 14.2,
           talent_scarcity_index: 8.7,
           market_health_score: 92,
-          projected_growth_next_quarter: 12.5,
+          projected_growth_next_quarter: 15.5,
         },
         top_roles: [
-          { role: 'AI Engineering Lead', growth: 38.4, avg_salary: 195000 },
-          { role: 'Staff MLOps Architect', growth: 29.1, avg_salary: 182000 },
-          { role: 'Senior Full Stack Tech Lead', growth: 18.5, avg_salary: 165000 },
+          { role: 'AI Engineering Lead', growth: 38.4, avg_salary: 3800000 },
+          { role: 'Staff MLOps Architect', growth: 29.1, avg_salary: 3200000 },
+          { role: 'Senior Full Stack Tech Lead', growth: 18.5, avg_salary: 2600000 },
         ],
         strategic_insights: [
-          'High talent competition in AI & PyTorch development; salaries increased by 14% YoY.',
-          'Remote & hybrid hiring accounts for 80% of top-tier engineering roles.',
+          'High talent competition in AI & PyTorch development; salaries increased by 18% YoY in Bengaluru and Hyderabad.',
+          'Remote & hybrid hiring accounts for 83% of top-tier engineering roles.',
         ],
       },
     };
@@ -490,7 +518,7 @@ export async function sendChatMessage(
     return data;
   } catch {
     return {
-      reply: `I analyzed your request regarding "${message}". Based on real-time market intelligence, skills like Python, PyTorch, TypeScript, and Cloud Infrastructure are seeing 25%+ YoY growth. Salaries for engineering leads range from $145,000 to $195,000.`,
+      reply: `I analyzed your request regarding "${message}". Based on real-time market intelligence, skills like Python, PyTorch, TypeScript, and Cloud Infrastructure are seeing 25%+ YoY growth. Salaries for engineering leads in India range from ₹18 LPA to ₹45+ LPA.`,
       conversation_id: conversationId || `conv-${Date.now()}`,
       suggested_questions: [
         'What are the top 5 highest paying skills in AI?',
@@ -499,7 +527,7 @@ export async function sendChatMessage(
       ],
       sources: [
         { title: 'SkillLens Market Intelligence Index 2024', relevance: 0.95 },
-        { title: 'Global Tech Hiring Benchmark Report', relevance: 0.89 },
+        { title: 'Indian Tech Hiring Benchmark Report', relevance: 0.89 },
       ],
     };
   }
