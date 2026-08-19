@@ -13,23 +13,28 @@ const config: Config = {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
-        background: '#050816',
-        surface: '#1a1a2e',
+        background: '#030508',
+        surface: '#0A0D14',
+        'surface-hover': '#111624',
+        'surface-border': '#1E2333',
         primary: '#00F5D4',
         'primary-dark': '#00CC96',
-        secondary: '#5B5FEE',
-        accent: '#E94560',
-        'text-primary': '#F8FAFC',
-        'text-secondary': '#a0a0a0',
+        secondary: '#6366F1',
+        accent: '#EC4899',
+        'text-primary': '#FFFFFF',
+        'text-secondary': '#94A3B8',
+        'text-muted': '#64748B',
       },
       backgroundColor: {
-        DEFAULT: '#050816',
+        DEFAULT: '#030508',
       },
       textColor: {
-        DEFAULT: '#F8FAFC',
+        DEFAULT: '#FFFFFF',
       },
       boxShadow: {
-        glass: '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+        glass: '0 8px 32px 0 rgba(0, 0, 0, 0.65)',
+        glow: '0 0 25px rgba(0, 245, 212, 0.15)',
+        'glow-lg': '0 0 40px rgba(0, 245, 212, 0.25)',
       },
     },
   },
@@ -37,3 +42,4 @@ const config: Config = {
 };
 
 export default config;
+

@@ -20,6 +20,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Settings,
+  Cpu,
 } from 'lucide-react';
 
 interface NavItem {
@@ -53,24 +54,29 @@ export default function Sidebar() {
   return (
     <aside
       className={cn(
-        'fixed left-0 top-0 z-40 flex h-full flex-col border-r border-gray-800/60 bg-[#0a0a1a] transition-all duration-300',
+        'fixed left-0 top-0 z-40 flex h-full flex-col border-r border-white/[0.08] bg-[#05070E] backdrop-blur-xl transition-all duration-300',
         sidebarCollapsed ? 'w-16' : 'w-64'
       )}
     >
-      <div className="flex h-14 items-center border-b border-gray-800/60 px-4">
-        <Link href="/dashboard" className="flex items-center gap-3">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
-            <span className="text-sm font-bold text-primary">S</span>
+      <div className="flex h-16 items-center border-b border-white/[0.08] px-4">
+        <Link href="/dashboard" className="flex items-center gap-3 group">
+          <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#1A1A2E] to-[#0D1127] border border-primary/40 shadow-[0_0_20px_rgba(0,245,212,0.2)] transition-transform duration-300 group-hover:scale-105">
+            <Cpu className="h-5 w-5 text-primary animate-pulse" />
           </div>
           {!sidebarCollapsed && (
-            <span className="text-sm font-bold tracking-widest text-text-primary">
-              SKILLLENS
-            </span>
+            <div className="flex flex-col">
+              <span className="text-sm font-extrabold tracking-widest bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">
+                SKILL<span className="text-primary">LENS</span>
+              </span>
+              <span className="text-[9px] font-semibold tracking-widest text-slate-500 uppercase">
+                AI ENGINE
+              </span>
+            </div>
           )}
         </Link>
         <button
           onClick={toggleSidebar}
-          className="ml-auto hidden rounded-lg p-1.5 text-text-secondary hover:bg-white/5 hover:text-text-primary md:block"
+          className="ml-auto hidden rounded-lg p-1.5 text-slate-400 hover:bg-white/[0.06] hover:text-white transition-colors md:block"
         >
           {sidebarCollapsed ? (
             <ChevronRight className="h-4 w-4" />
@@ -80,18 +86,18 @@ export default function Sidebar() {
         </button>
       </div>
 
-      <nav className="flex-1 overflow-y-auto px-2 py-4 scrollbar-thin">
+      <nav className="flex-1 overflow-y-auto px-2.5 py-4 space-y-4">
         {sections.map((section) => {
           const items = navItems.filter((item) => item.section === section);
           if (items.length === 0) return null;
           return (
-            <div key={section} className="mb-4">
+            <div key={section}>
               {!sidebarCollapsed && (
-                <p className="mb-2 px-3 text-[10px] font-semibold uppercase tracking-widest text-text-secondary/50">
+                <p className="mb-2 px-3 text-[10px] font-bold uppercase tracking-widest text-slate-500">
                   {section}
                 </p>
               )}
-              <ul className="space-y-0.5">
+              <ul className="space-y-1">
                 {items.map((item) => {
                   const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
                   return (
@@ -99,16 +105,19 @@ export default function Sidebar() {
                       <Link
                         href={item.href}
                         className={cn(
-                          'group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200',
+                          'group relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200',
                           isActive
-                            ? 'bg-primary/10 text-primary'
-                            : 'text-text-secondary hover:bg-white/5 hover:text-text-primary'
+                            ? 'bg-primary/10 text-primary border border-primary/30 shadow-[0_0_20px_rgba(0,245,212,0.12)] font-semibold'
+                            : 'text-slate-400 hover:bg-white/[0.04] hover:text-slate-100'
                         )}
                       >
+                        {isActive && (
+                          <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 rounded-r-full bg-primary shadow-[0_0_8px_rgba(0,245,212,0.8)]" />
+                        )}
                         <item.icon
                           className={cn(
                             'h-4 w-4 shrink-0 transition-colors',
-                            isActive ? 'text-primary' : 'text-text-secondary group-hover:text-text-primary'
+                            isActive ? 'text-primary drop-shadow-[0_0_8px_rgba(0,245,212,0.6)]' : 'text-slate-400 group-hover:text-slate-100'
                           )}
                         />
                         {!sidebarCollapsed && <span>{item.label}</span>}
@@ -122,14 +131,14 @@ export default function Sidebar() {
         })}
       </nav>
 
-      <div className="border-t border-gray-800/60 px-2 py-3">
+      <div className="border-t border-white/[0.08] px-2.5 py-3">
         <Link
           href="/settings"
           className={cn(
-            'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200',
+            'flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200',
             pathname === '/settings'
-              ? 'bg-primary/10 text-primary'
-              : 'text-text-secondary hover:bg-white/5 hover:text-text-primary'
+              ? 'bg-primary/10 text-primary border border-primary/30 shadow-[0_0_20px_rgba(0,245,212,0.12)] font-semibold'
+              : 'text-slate-400 hover:bg-white/[0.04] hover:text-slate-100'
           )}
         >
           <Settings className="h-4 w-4 shrink-0" />
@@ -139,3 +148,4 @@ export default function Sidebar() {
     </aside>
   );
 }
+

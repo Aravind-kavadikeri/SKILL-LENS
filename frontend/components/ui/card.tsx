@@ -8,7 +8,7 @@ const Card = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
     <div
       ref={ref}
       className={cn(
-        'rounded-xl border border-gray-800/60 bg-surface/50 backdrop-blur-sm shadow-lg',
+        'rounded-2xl border border-white/[0.08] bg-[#0A0D14]/90 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.65)] transition-all duration-300 hover:border-white/[0.15]',
         className
       )}
       {...props}
@@ -26,14 +26,14 @@ CardHeader.displayName = 'CardHeader';
 
 const CardTitle = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLHeadingElement>>(
   ({ className, ...props }, ref) => (
-    <h3 ref={ref} className={cn('text-lg font-semibold text-text-primary', className)} {...props} />
+    <h3 ref={ref} className={cn('text-lg font-bold text-white tracking-tight', className)} {...props} />
   )
 );
 CardTitle.displayName = 'CardTitle';
 
 const CardDescription = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLParagraphElement>>(
   ({ className, ...props }, ref) => (
-    <p ref={ref} className={cn('text-sm text-text-secondary', className)} {...props} />
+    <p ref={ref} className={cn('text-xs text-slate-400 font-medium', className)} {...props} />
   )
 );
 CardDescription.displayName = 'CardDescription';
@@ -53,3 +53,4 @@ const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 CardFooter.displayName = 'CardFooter';
 
 export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter };
+

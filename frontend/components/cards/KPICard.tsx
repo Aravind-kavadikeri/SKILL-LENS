@@ -27,17 +27,19 @@ export function KPICard({ label, value, change, icon, format, className }: KPICa
       : value;
 
   return (
-    <Card className={cn('min-w-[180px]', className)}>
-      <CardContent className="p-4">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-xs font-medium text-text-secondary uppercase tracking-wider">{label}</span>
-          {icon && <span className="text-primary/70">{icon}</span>}
+    <Card className={cn('relative overflow-hidden min-w-[180px] group border-white/[0.08] hover:border-primary/40 transition-all duration-300', className)}>
+      <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <CardContent className="p-5">
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">{label}</span>
+          {icon && <span className="p-2 rounded-xl bg-primary/10 text-primary border border-primary/20 shadow-[0_0_12px_rgba(0,245,212,0.15)]">{icon}</span>}
         </div>
-        <div className="flex items-baseline gap-2">
-          <span className="text-2xl font-bold text-text-primary">{formattedValue}</span>
+        <div className="flex items-baseline gap-2.5">
+          <span className="text-3xl font-extrabold text-white tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">{formattedValue}</span>
           {change !== undefined && <MetricDelta value={change} />}
         </div>
       </CardContent>
     </Card>
   );
 }
+

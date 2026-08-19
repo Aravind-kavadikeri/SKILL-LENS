@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --color-background: #050816;
-  --color-surface: #1a1a2e;
+  --color-background: #030508;
+  --color-surface: #0A0D14;
   --color-primary: #00F5D4;
   --color-primary-dark: #00CC96;
-  --color-secondary: #5B5FEE;
-  --color-accent: #E94560;
-  --color-text-primary: #F8FAFC;
-  --color-text-secondary: #a0a0a0;
+  --color-secondary: #6366F1;
+  --color-accent: #EC4899;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #94A3B8;
 }
 
 * {
@@ -32,44 +32,44 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #030508;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.12);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 245, 212, 0.4);
 }
 
 .glass {
-  background: rgba(26, 26, 46, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(10, 13, 20, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
 }
 
 .glass-hover {
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-hover:hover {
-  background: rgba(26, 26, 46, 0.8);
-  border-color: rgba(0, 245, 212, 0.15);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  background: rgba(17, 22, 36, 0.95);
+  border-color: rgba(0, 245, 212, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 245, 212, 0.1);
 }
 
 @layer base {
   * {
-    @apply border-gray-800;
+    @apply border-white/[0.08];
   }
   body {
     @apply bg-background text-text-primary;
@@ -78,8 +78,8 @@ body {
 
 @layer components {
   .card-gradient {
-    background: linear-gradient(135deg, rgba(26, 26, 46, 0.8) 0%, rgba(5, 8, 22, 0.6) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: linear-gradient(135deg, rgba(10, 13, 20, 0.95) 0%, rgba(3, 5, 8, 0.9) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
   }
 }
