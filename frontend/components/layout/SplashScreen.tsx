@@ -144,7 +144,7 @@ export default function SplashScreen() {
     <div
       aria-hidden={phase === 'launching'}
       className={cn(
-        'fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden bg-[#050816] transition-all duration-700 ease-in-out',
+        'fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden bg-[#030508] transition-all duration-700 ease-in-out',
         phase === 'launching'
           ? 'pointer-events-none scale-110 opacity-0 blur-md'
           : 'opacity-100 scale-100'
@@ -173,7 +173,7 @@ export default function SplashScreen() {
           <div className="absolute w-28 h-28 rounded-full border-2 border-primary/40 shadow-[0_0_50px_rgba(0,245,212,0.35)] animate-ping-slow" />
           
           {/* Center Lens Shield */}
-          <div className="relative flex items-center justify-center w-24 h-24 rounded-3xl bg-gradient-to-br from-[#1A1A2E] to-[#0D1127] border border-primary/40 shadow-[0_0_40px_rgba(0,245,212,0.25)] backdrop-blur-xl group">
+          <div className="relative flex items-center justify-center w-24 h-24 rounded-3xl bg-gradient-to-br from-[#0A0D14] to-[#05070E] border border-primary/40 shadow-[0_0_40px_rgba(0,245,212,0.25)] backdrop-blur-xl group">
             <div className="absolute inset-0 rounded-3xl bg-primary/10 blur-sm" />
             <Cpu className="w-12 h-12 text-primary animate-pulse relative z-10" />
             
@@ -201,26 +201,26 @@ export default function SplashScreen() {
 
         {/* Platform Feature Pills */}
         <div className="grid grid-cols-2 gap-2.5 w-full mb-8">
-          <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/[0.03] border border-white/10 backdrop-blur-md text-left text-xs text-slate-300">
+          <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#0A0D14]/90 border border-white/[0.08] backdrop-blur-md text-left text-xs text-slate-300 hover:border-primary/30 transition-colors">
             <TrendingUp className="w-4 h-4 text-primary shrink-0" />
             <span className="font-medium">Real-Time Market Telemetry</span>
           </div>
-          <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/[0.03] border border-white/10 backdrop-blur-md text-left text-xs text-slate-300">
+          <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#0A0D14]/90 border border-white/[0.08] backdrop-blur-md text-left text-xs text-slate-300 hover:border-indigo-400/30 transition-colors">
             <GitFork className="w-4 h-4 text-indigo-400 shrink-0" />
             <span className="font-medium">3D Skill Graph & Career Twin</span>
           </div>
-          <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/[0.03] border border-white/10 backdrop-blur-md text-left text-xs text-slate-300">
+          <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#0A0D14]/90 border border-white/[0.08] backdrop-blur-md text-left text-xs text-slate-300 hover:border-emerald-400/30 transition-colors">
             <FileCheck2 className="w-4 h-4 text-emerald-400 shrink-0" />
             <span className="font-medium">ATS Resume Optimization</span>
           </div>
-          <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/[0.03] border border-white/10 backdrop-blur-md text-left text-xs text-slate-300">
+          <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#0A0D14]/90 border border-white/[0.08] backdrop-blur-md text-left text-xs text-slate-300 hover:border-amber-400/30 transition-colors">
             <Zap className="w-4 h-4 text-amber-400 shrink-0" />
             <span className="font-medium">Salary & Demand AI Forecast</span>
           </div>
         </div>
 
         {/* Interactive Progress & Enter Button Section */}
-        <div className="w-full bg-[#1A1A2E]/80 border border-white/10 rounded-2xl p-5 backdrop-blur-xl shadow-2xl relative overflow-hidden">
+        <div className="w-full bg-[#0A0D14]/95 border border-white/[0.08] rounded-2xl p-5 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.65)] relative overflow-hidden">
           
           {/* Top Progress Header */}
           <div className="flex items-center justify-between text-xs font-semibold tracking-wider text-slate-300 mb-2">
@@ -239,7 +239,7 @@ export default function SplashScreen() {
           </div>
 
           {/* Progress Bar Container */}
-          <div className="h-2 w-full rounded-full bg-slate-800/80 overflow-hidden mb-3 p-0.5 border border-white/5">
+          <div className="h-2 w-full rounded-full bg-slate-900 overflow-hidden mb-3 p-0.5 border border-white/5">
             <div
               className="h-full rounded-full bg-gradient-to-r from-indigo-500 via-cyan-400 to-primary transition-all duration-200 ease-out shadow-[0_0_12px_rgba(0,245,212,0.8)]"
               style={{ width: `${progress}%` }}
@@ -274,4 +274,5 @@ export default function SplashScreen() {
       </div>
     </div>
   );
+}
 }
