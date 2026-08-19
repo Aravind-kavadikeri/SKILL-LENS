@@ -1,6 +1,7 @@
 {
-  "buildCommand": "cd frontend && npm run build",
-  "outputDirectory": "frontend/.next",
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
-  "installCommand": "cd frontend && npm install --legacy-peer-deps"
+  "installCommand": "if [ -d \"frontend\" ]; then cd frontend; fi && npm install --legacy-peer-deps",
+  "buildCommand": "if [ -d \"frontend\" ]; then cd frontend; fi && npm run build",
+  "outputDirectory": "frontend/.next"
 }
